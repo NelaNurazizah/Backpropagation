@@ -2,13 +2,17 @@ from flask import Flask, render_template, request
 import numpy as np
 import pickle
 import tensorflow as tf
+import os
+
 
 app = Flask(__name__)
 
 # Load model dan scaler
-model = tf.keras.models.load_model('model/model.h5', compile=False)
-scaler_X = pickle.load(open('model/scaler_X.pkl', 'rb'))
-scaler_y = pickle.load(open('model/scaler_y.pkl', 'rb'))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = tf.keras.models.load_model(os.path.join(BASE_DIR, 'model', 'model.h5'), compile=False)
+scaler_X = pickle.load(open(os.path.join(BASE_DIR, 'model', 'scaler_X.pkl'), 'rb'))
+scaler_y = pickle.load(open(os.path.join(BASE_DIR, 'model', 'scaler_y.pkl'), 'rb'))
 
 @app.route('/', methods=['GET', 'POST'])
 def index():

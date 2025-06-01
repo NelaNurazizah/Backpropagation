@@ -6,7 +6,7 @@ import tensorflow as tf
 app = Flask(__name__)
 
 # Load model dan scaler
-model = tf.keras.models.load_model('model/model.h5')
+model = tf.keras.models.load_model('model/model.h5', compile=False)
 scaler_X = pickle.load(open('model/scaler_X.pkl', 'rb'))
 scaler_y = pickle.load(open('model/scaler_y.pkl', 'rb'))
 
